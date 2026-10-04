@@ -6,13 +6,13 @@
 <meta name="description" content="Diogo Batista — Web Developer. Websites simples, modernos e pensados para transformar ideias em experiências digitais.">
 <title>Diogo Batista — Web Developer</title>
 <style>
-  :root {
-    --bg: #cec4b5;
-    --ink: #17181A;
-    --ink-soft: #55575C;
-    --line: #000000;
-    --accent: #2F5D50;
-    --card-bg: #FFFFFF;
+ :root {
+    --bg: #121826;
+    --ink: #F5F6F8;
+    --ink-soft: #9BA3AF;
+    --line: #2A3242;
+    --accent: #2F6FED;
+    --card-bg: #1A2232;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,7 +42,7 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(225, 220, 208, 0.85);
+    background: rgba(18, 24, 38, 0.85);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
   }
@@ -52,6 +52,25 @@
     align-items: center;
     justify-content: space-between;
     height: 72px;
+  }
+
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-initials {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 4px 8px;
+  }
+  .logo-text {
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .logo {
@@ -116,9 +135,10 @@
 
   .eyebrow {
     font-size: 13px;
-    color: var(--ink-soft);
-    letter-spacing: 0.04em;
+    color: var(--accent);
+    letter-spacing: 0.25em;
     margin-bottom: 24px;
+    font-weight: 600;
   }
 
   h1.headline {
@@ -151,7 +171,7 @@
   .btn-primary:hover { background: transparent; color: var(--ink); }
 
   .scroll-hint {
-    margin-top: 120px;
+    margin-top: 48px;
     font-size: 13px;
     color: var(--ink-soft);
     display: flex;
@@ -213,24 +233,58 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    transition: transform 0.4s ease;
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
-  .project-media:hover { transform: translateY(-4px); }
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 18, 20, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: background 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .project-media:hover .project-overlay {
+    background: rgba(17, 18, 20, 0.55);
+    opacity: 1;
+  }
+  .overlay-btn {
+    background: var(--bg);
+    color: var(--ink);
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    transform: translateY(12px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: auto;
+  }
+  .project-media:hover .overlay-btn {
+    transform: translateY(0);
+    opacity: 1;
+  }
 
   .browser-bar {
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 34px;
-    background: #F1F0ED;
+    background: #1E2638;
     border-bottom: 1px solid var(--line);
     display: flex;
     align-items: center;
     gap: 6px;
     padding: 0 14px;
+    z-index: 1;
   }
   .browser-bar span {
     width: 8px; height: 8px; border-radius: 50%;
-    background: #D8D6D1;
+    background: #3A4254;
   }
 
   .project-media iframe {
@@ -332,6 +386,36 @@
     color: var(--ink-soft);
   }
 
+  /* ---------- SERVICES ---------- */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .service-card {
+    background: var(--card-bg);
+    padding: 40px;
+  }
+  .service-name {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .service-desc {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    max-width: 320px;
+  }
+  .service-price {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--accent);
+  }
+
   /* ---------- PROCESS ---------- */
   .process-grid {
     display: grid;
@@ -362,10 +446,34 @@
     max-width: 260px;
   }
 
+  /* ---------- FAQ ---------- */
+  .faq-item {
+    border-top: 1px solid var(--line);
+    padding: 24px 0;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-a {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    max-width: 560px;
+    display: none;
+  }
+  .faq-item.open .faq-a { display: block; }
+  .faq-toggle { font-size: 20px; color: var(--accent); }
+
   /* ---------- CONTACT ---------- */
   .contact {
-    background: var(--ink);
-    color: var(--bg);
+    background: var(--card-bg);
+    border: 1px solid var(--line);
     border-radius: 24px;
     padding: 80px 56px;
     margin: 0 32px;
@@ -388,7 +496,7 @@
 
   .contact-sub {
     margin-top: 16px;
-    color: #B9B9B6;
+    color: var(--ink-soft);
     font-size: 15px;
   }
 
@@ -400,7 +508,7 @@
 
   .contact-label {
     font-size: 12px;
-    color: #8C8C89;
+    color: var(--ink-soft);
     margin-bottom: 6px;
   }
 
@@ -410,11 +518,11 @@
 
   .btn-light {
     margin-top: 44px;
-    background: var(--bg);
-    color: var(--ink);
-    border: 1px solid var(--bg);
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
   }
-  .btn-light:hover { background: transparent; color: var(--bg); }
+  .btn-light:hover { background: transparent; color: var(--ink); }
 
   form {
     display: flex;
@@ -425,15 +533,15 @@
   form input, form textarea {
     background: transparent;
     border: none;
-    border-bottom: 1px solid #4A4A48;
-    color: var(--bg);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
     padding: 12px 0;
     font-size: 15px;
     font-family: inherit;
   }
 
-  form input::placeholder, form textarea::placeholder { color: #8C8C89; }
-  form input:focus, form textarea:focus { outline: none; border-color: var(--bg); }
+  form input::placeholder, form textarea::placeholder { color: var(--ink-soft); }
+  form input:focus, form textarea:focus { outline: none; border-color: var(--accent); }
 
   form textarea { resize: none; min-height: 80px; }
 
@@ -481,7 +589,6 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
-    .project-media:hover { transform: none; }
   }
 
   /* ---------- RESPONSIVE ---------- */
@@ -493,6 +600,7 @@
     .project:nth-child(even) .project-media { order: 0; }
     .about-grid, .contact-inner { grid-template-columns: 1fr; }
     .process-grid { grid-template-columns: 1fr; gap: 32px; }
+    .services-grid { grid-template-columns: 1fr; }
     .contact { margin: 0 16px; padding: 56px 28px; border-radius: 18px; }
     .contact-info { flex-direction: column; gap: 20px; }
     .wrap { padding: 0 20px; }
@@ -516,14 +624,17 @@
 
 <header>
   <div class="wrap">
-    <div class="logo">Diogo Batista</div>
+    <div class="logo-mark">
+      <span class="logo-initials">DB</span>
+      <span class="logo-text">Diogo Batista</span>
+    </div>
     <nav id="nav">
       <div class="links">
         <a href="#projetos">Projetos</a>
         <a href="#sobre">Sobre</a>
         <a href="#contacto">Contactos</a>
       </div>
-      <a href="#contacto" class="btn btn-ghost">Vamos trabalhar juntos →</a>
+      <a href="#contacto" class="btn btn-ghost">Vamos trabalhar juntos</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
       <span></span><span></span><span></span>
@@ -534,12 +645,14 @@
 <section class="hero">
   <div class="wrap">
     <div class="eyebrow reveal">WEB DEVELOPER</div>
+    <div style="width: 40px; height: 2px; background: var(--accent); margin: 20px 0;"></div>
     <h1 class="headline reveal">Construo o site<br>que o seu negócio precisa</h1>
     <p class="hero-text reveal">Desenvolvo websites modernos, rápidos e pensados para transformar ideias em experiências digitais.</p>
     <div class="hero-actions reveal">
-      <a href="#projetos" class="btn btn-primary">Ver Projetos ↓</a>
-      <a href="#contacto" class="btn btn-ghost">Entrar em Contacto →</a>
+      <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
+      <a href="#contacto" class="btn btn-ghost">Entrar em Contacto</a>
     </div>
+    <p class="hero-text reveal" style="font-size: 12px; letter-spacing: 0.15em; margin-top: 20px;">IDEIAS · CÓDIGO · WEBSITES · RESULTADOS</p>
     <div class="scroll-hint reveal">
       <span class="line"></span>
       Scroll para explorar
@@ -560,13 +673,14 @@
       <div class="project-media">
         <div class="browser-bar"><span></span><span></span><span></span></div>
         <iframe src="https://raiz-cesto-showcase.lovable.app" title="Raiz & Cesto" loading="lazy"></iframe>
+        <a href="https://raiz-cesto-showcase.lovable.app" target="_blank" class="project-overlay"><span class="overlay-btn">Ver Projeto</span></a>
       </div>
       <div>
         <div class="project-index">Projeto 01</div>
         <div class="project-name">Raiz & Cesto</div>
         <div class="project-category">E-commerce / Mercearia</div>
         <p class="project-desc">Website moderno para uma mercearia urbana, focado numa experiência de compra simples e visual.</p>
-        <a href="https://raiz-cesto-showcase.lovable.app" target="_blank" class="project-link">Ver Projeto →</a>
+        <a href="https://raiz-cesto-showcase.lovable.app" target="_blank" class="project-link">Ver Projeto</a>
       </div>
     </div>
 
@@ -574,13 +688,14 @@
       <div class="project-media">
         <div class="browser-bar"><span></span><span></span><span></span></div>
         <iframe src="https://drivemais-demo-site.lovable.app" title="DriveMais" loading="lazy"></iframe>
+        <a href="https://drivemais-demo-site.lovable.app" target="_blank" class="project-overlay"><span class="overlay-btn">Ver Projeto</span></a>
       </div>
       <div>
         <div class="project-index">Projeto 02</div>
         <div class="project-name">DriveMais</div>
         <div class="project-category">Escola de Condução</div>
         <p class="project-desc">Website profissional desenvolvido para apresentar serviços, preços e facilitar o contacto com novos alunos.</p>
-        <a href="https://drivemais-demo-site.lovable.app" target="_blank" class="project-link">Ver Projeto →</a>
+        <a href="https://drivemais-demo-site.lovable.app" target="_blank" class="project-link">Ver Projeto</a>
       </div>
     </div>
 
@@ -588,13 +703,14 @@
       <div class="project-media">
         <div class="browser-bar"><span></span><span></span><span></span></div>
         <iframe src="https://elegant-shears-pro.lovable.app" title="Studio Hair" loading="lazy"></iframe>
+        <a href="https://elegant-shears-pro.lovable.app" target="_blank" class="project-overlay"><span class="overlay-btn">Ver Projeto</span></a>
       </div>
       <div>
         <div class="project-index">Projeto 03</div>
         <div class="project-name">Studio Hair</div>
         <div class="project-category">Cabeleireiro / Beauty</div>
         <p class="project-desc">Website elegante para um salão de cabeleireiro, com foco na apresentação dos serviços e marcações.</p>
-        <a href="https://elegant-shears-pro.lovable.app" target="_blank" class="project-link">Ver Projeto →</a>
+        <a href="https://elegant-shears-pro.lovable.app" target="_blank" class="project-link">Ver Projeto</a>
       </div>
     </div>
   </div>
@@ -635,6 +751,26 @@
 <section class="section-line">
   <div class="wrap">
     <div class="section-head reveal">
+      <div class="section-title">Serviços</div>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-name">Websites</div>
+        <p class="service-desc">Criação de websites modernos e responsivos, desde landing pages a sites institucionais completos.</p>
+        <div class="service-price">A partir de 100€</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Design de Anúncios</div>
+        <p class="service-desc">Criação visual de anúncios para redes sociais, prontos a publicar onde preferir.</p>
+        <div class="service-price">A partir de 50€</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-line">
+  <div class="wrap">
+    <div class="section-head reveal">
       <div class="section-title">Como trabalho?</div>
     </div>
     <div class="process-grid reveal">
@@ -657,6 +793,28 @@
   </div>
 </section>
 
+<section class="section-line">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-title">Perguntas Frequentes</div>
+    </div>
+    <div class="reveal">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Quanto tempo demora a fazer um website? <span class="faq-toggle">+</span></div>
+        <p class="faq-a">Normalmente cerca de 2 dias, dependendo da complexidade do projeto.</p>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Preciso de ter domínio e hosting próprios? <span class="faq-toggle">+</span></div>
+        <p class="faq-a">Não é obrigatório. Posso entregar o site com um link gratuito, ou configurar um domínio próprio por um custo adicional de cerca de 10€/ano.</p>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Como funciona o pagamento? <span class="faq-toggle">+</span></div>
+        <p class="faq-a">50% no início do projeto e 50% na entrega, via MBWay ou transferência bancária.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contacto">
   <div class="contact reveal">
     <div class="contact-inner">
@@ -673,14 +831,14 @@
             <div class="contact-value">diogobconta2@gmail.com</div>
           </div>
         </div>
-        <a href="mailto:diogobconta2@gmail.com" class="btn btn-light">Entrar em Contacto →</a>
+        <a href="mailto:diogobconta2@gmail.com" class="btn btn-light">Entrar em Contacto</a>
       </div>
       <form onsubmit="event.preventDefault(); this.reset(); document.getElementById('formMsg').style.display='block';">
         <input type="text" placeholder="Nome" required>
         <input type="email" placeholder="Email" required>
         <textarea placeholder="Mensagem" required></textarea>
         <button type="submit" class="btn btn-light form-submit">Enviar Mensagem</button>
-        <div id="formMsg" style="display:none; font-size:13px; color:#B9B9B6;">Mensagem enviada. Entro em contacto brevemente.</div>
+        <div id="formMsg" style="display:none; font-size:13px; color:var(--ink-soft);">Mensagem enviada. Entro em contacto brevemente.</div>
       </form>
     </div>
   </div>
@@ -709,6 +867,22 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.project-media').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
+      card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
 </script>
 
 </body>
